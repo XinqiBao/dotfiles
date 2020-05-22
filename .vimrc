@@ -44,7 +44,7 @@ Plug 'ycm-core/YouCompleteMe'
 Plug 'kien/ctrlp.vim'
 Plug 'mbbill/undotree'
 
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
 Plug 'rhysd/vim-clang-format'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'plasticboy/vim-markdown'
@@ -54,10 +54,9 @@ call plug#end()
 
 colorscheme gruvbox
 
-"let g:netrw_banner = 0
-"let g:netrw_liststyle = 3
-"let g:netrw_browse_split = 4
-"let g:netrw_winsize = 25
+autocmd StdinReadPre * let s:std_in=1
+"when vim openning with no file, open NERDTree
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let g:ctrlp_use_caching = 0
@@ -74,7 +73,7 @@ nnoremap <C-l> <C-w>l
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
 nnoremap <leader>u :UndotreeShow<CR>
-"nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+nnoremap <leader>v :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
 
