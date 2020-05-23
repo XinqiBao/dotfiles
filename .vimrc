@@ -36,6 +36,8 @@ set tags=tags~;,tags~
 "setting gf (go file) path
 set path+=/usr/include/c++/*,include;,includes;,lib;
 
+" Using "+ register for all the yank and paste in vim
+set clipboard=unnamedplus
 
 call plug#begin()
 
