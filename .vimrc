@@ -36,8 +36,13 @@ set tags=tags~;,tags~
 "setting gf (go file) path
 set path+=/usr/include/c++/*,include;,includes;,lib;
 
-" Using "+ register for all the yank and paste in vim
-set clipboard=unnamedplus
+" Writes to the unnamed register also writes to the * and + registers. This
+" makes it easy to interact with the system clipboard
+if has ('unnamedplus')
+    set clipboard=unnamedplus
+else
+    set clipboard=unnamed
+endif
 
 call plug#begin()
 
