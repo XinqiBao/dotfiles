@@ -93,6 +93,7 @@ match ExtraWhitespace /\s\+$/
 
 "use powerline-vim for normal use
 "instead of installing for both user and root
+"run to install lib: pip3 install --user powerline-status
 python3 from powerline.vim import setup as powerline_setup
 python3 powerline_setup()
 python3 del powerline_setup
