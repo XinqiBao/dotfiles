@@ -34,7 +34,12 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 set tags=tags~;,tags~
 "setting gf (go file) path
-set path+=/usr/include/c++/*,include;,includes;,lib;
+"change kernel version to your version, for kernel development
+set path=.,lib;,include;,includes;
+set path+=/lib/modules/5.4.46-1-lts/build/include
+set path+=/lib/modules/5.4.46-1-lts/build/arch/x86/include
+set path+=/usr/include,/usr/include/c++/*
+
 
 " Writes to the unnamed register also writes to the * and + registers. This
 " makes it easy to interact with the system clipboard
@@ -71,6 +76,10 @@ let g:ctrlp_use_caching = 0
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_enable_diagnostic_signs = 0
 let g:ycm_always_populate_location_list = 1
+"let g:ycm_show_diagnostics_ui = 0
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_auto_hover = 'no'
 
 let mapleader = " "
 nnoremap <C-h> <C-w>h
