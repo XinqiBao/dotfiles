@@ -18,7 +18,9 @@ set ignorecase
 set cursorline
 set autochdir
 set mouse=a
+set showtabline=2
 set laststatus=2 "always show status line
+set noshowmode
 set wildmenu
 
 " Turn backup off
@@ -51,11 +53,15 @@ endif
 
 call plug#begin()
 
+Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+
 Plug 'morhetz/gruvbox'
 Plug 'ycm-core/YouCompleteMe'
 Plug 'kien/ctrlp.vim'
 Plug 'mbbill/undotree'
 
+Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdtree'
 Plug 'rhysd/vim-clang-format'
 Plug 'ludovicchabant/vim-gutentags'
@@ -65,6 +71,14 @@ Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 colorscheme gruvbox
+
+"tabline with airline
+":help airline-tabline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#show_tab_count = 0
+let g:airline#extensions#tabline#show_close_button = 0
 
 autocmd StdinReadPre * let s:std_in=1
 "when vim openning with no file, open NERDTree
@@ -82,6 +96,8 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_auto_hover = 'no'
 
 let mapleader = " "
+nnoremap J :tabprevious<CR>
+nnoremap K :tabnext<CR>
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -103,6 +119,6 @@ match ExtraWhitespace /\s\+$/
 "use powerline-vim for normal use
 "instead of installing for both user and root
 "run to install lib: pip3 install --user powerline-status
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
+"python3 from powerline.vim import setup as powerline_setup
+"python3 powerline_setup()
+"python3 del powerline_setup
