@@ -106,8 +106,10 @@ nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>v :NERDTreeToggle<CR>
-nnoremap <silent> <Leader>+ :vertical resize +5<CR>
-nnoremap <silent> <Leader>- :vertical resize -5<CR>
+nnoremap <silent> <Leader>+ :resize +5<CR>
+nnoremap <silent> <Leader>- :resize -5<CR>
+nnoremap <silent> <Leader>v+ :vertical resize +5<CR>
+nnoremap <silent> <Leader>v- :vertical resize -5<CR>
 
 nnoremap <silent> <leader>gd :YcmCompleter GoTo<CR>
 nnoremap <silent> <leader>gr :YcmCompleter GoToReferences<CR>
