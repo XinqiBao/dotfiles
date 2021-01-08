@@ -2,7 +2,13 @@ syntax enable
 "colorscheme wombat256mod
 set background=dark
 
+"In order to display chinese in GBK
+let &termencoding=&encoding
+set fileencodings=utf-8,gbk
+
 set t_Co=256 "terminal color
+set t_ut=""
+"set term=xterm-256color
 set encoding=utf-8 "required for ycm
 set noerrorbells
 set tabstop=4 softtabstop=4
@@ -42,6 +48,8 @@ set path=.,lib;,include;,includes;
 set path+=/lib/modules/5.4.46-1-lts/build/include
 set path+=/lib/modules/5.4.46-1-lts/build/arch/x86/include
 set path+=/usr/include,/usr/include/c++/*
+set path+=/usr/local/include
+set path+=~/lib
 
 
 " Writes to the unnamed register also writes to the * and + registers. This
@@ -89,6 +97,7 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 let g:ctrlp_use_caching = 0
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
 let g:ycm_enable_diagnostic_signs = 0
 let g:ycm_always_populate_location_list = 1
 "let g:ycm_show_diagnostics_ui = 0
@@ -106,7 +115,7 @@ nnoremap <C-l> <C-w>l
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
 nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <leader>v :NERDTreeToggle<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>+ :resize +5<CR>
 nnoremap <silent> <Leader>- :resize -5<CR>
 nnoremap <silent> <Leader>v+ :vertical resize +5<CR>
