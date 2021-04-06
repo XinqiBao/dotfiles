@@ -13,3 +13,6 @@ export PS1="[\[\e[36;1m\]\u@\h \[\e[32;1m\]\w\[\e[m\]]\[\e[33m\](\$(git branch 2
 export EDITOR=vim
 
 export TERM=xterm-256color
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"

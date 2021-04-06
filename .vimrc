@@ -38,7 +38,7 @@ set undodir=~/.vim/undodir
 set undofile
 
 "ColumnLimit
-set colorcolumn=80
+set colorcolumn=120
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 set tags=tags~;,tags~
@@ -67,8 +67,11 @@ Plug 'vim-airline/vim-airline'
 
 Plug 'morhetz/gruvbox'
 Plug 'ycm-core/YouCompleteMe'
-Plug 'kien/ctrlp.vim'
 Plug 'mbbill/undotree'
+"Plug 'kien/ctrlp.vim'
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdtree'
@@ -95,6 +98,11 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let g:ctrlp_use_caching = 0
+
+"mapping for fzf.vim
+nnoremap <C-p> :GFiles<CR>
+"as default <C-f>/<C-b> pair used to page down/up entire page
+nnoremap <C-f> :Tags<CR>
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
