@@ -51,6 +51,7 @@ set path+=/usr/include,/usr/include/c++/*
 set path+=/usr/local/include
 set path+=~/lib
 
+set foldmethod=syntax
 
 " Writes to the unnamed register also writes to the * and + registers. This
 " makes it easy to interact with the system clipboard
