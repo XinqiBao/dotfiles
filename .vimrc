@@ -5,6 +5,8 @@ set background=dark
 "In order to display chinese in GBK
 let &termencoding=&encoding
 set fileencodings=utf-8,gbk
+set fileformat=unix
+set foldmethod=manual
 
 set t_Co=256 "terminal color
 set t_ut=""
@@ -50,8 +52,6 @@ set path+=/lib/modules/5.4.46-1-lts/build/arch/x86/include
 set path+=/usr/include,/usr/include/c++/*
 set path+=/usr/local/include
 set path+=~/lib
-
-set foldmethod=syntax
 
 " Writes to the unnamed register also writes to the * and + registers. This
 " makes it easy to interact with the system clipboard
@@ -117,6 +117,8 @@ let g:ycm_auto_hover = 'no'
 let mapleader = " "
 nnoremap J :tabprevious<CR>
 nnoremap K :tabnext<CR>
+nnoremap <leader>J :tabmove -1<CR>
+nnoremap <leader>K :tabmove +1<CR>
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
