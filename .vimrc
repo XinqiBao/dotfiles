@@ -81,6 +81,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'plasticboy/vim-markdown'
 Plug 'christoomey/vim-tmux-navigator'
 
+Plug 'Yggdroot/indentLine'
 call plug#end()
 
 colorscheme gruvbox
