@@ -14,5 +14,7 @@ export EDITOR=vim
 
 export TERM=xterm-256color
 
+ulimit -c unlimited
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"
+
