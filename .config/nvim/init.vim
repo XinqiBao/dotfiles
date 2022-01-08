@@ -182,6 +182,9 @@ if has_key(plugs, "coc.nvim")
     xmap <leader>f  <Plug>(coc-format-selected)
     nmap <leader>f  <Plug>(coc-format-selected)
 
+    " Apply AutoFix to problem on the current line.
+    nmap <leader>qf  <Plug>(coc-fix-current)
+
     " clangd
     nmap <leader>gh :CocCommand clangd.switchSourceHeader<CR>
 
@@ -196,6 +199,18 @@ if has_key(plugs, "coc.nvim")
         execute '!' . &keywordprg . " " . expand('<cword>')
       endif
     endfunction
+
+    let g:coc_default_semantic_highlight_groups = 1
+    let g:coc_global_extensions = [
+                \'coc-marketplace',
+                \'coc-highlight',
+                \'coc-clangd',
+                \'coc-jedi',
+                \'coc-vimlsp',
+                \'coc-sh',
+                \'coc-json',
+                \'coc-yaml'
+                \]
 endif
 
 "----------------------
