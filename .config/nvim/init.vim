@@ -218,6 +218,10 @@ endif
 "----------------------
 if has_key(plugs, 'nvim-treesitter')
     lua require('plugin-config/nvim-treesitter')
+
+    set foldmethod=expr
+    set foldexpr=nvim_treesitter#foldexpr()
+    set foldlevel=99
 endif
 
 
