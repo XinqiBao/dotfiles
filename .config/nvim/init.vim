@@ -79,9 +79,12 @@ call plug#begin()
 
     Plug 'mbbill/undotree'
     Plug 'preservim/nerdtree'
+    Plug 'majutsushi/tagbar'
+
     Plug 'plasticboy/vim-markdown'
 
     Plug 'tpope/vim-fugitive'
+    Plug 'airblade/vim-gitgutter'
     Plug 'kdheepak/lazygit.nvim'
 
     "Plug 'ycm-core/YouCompleteMe'
@@ -128,7 +131,7 @@ endif
 " undotree setting
 "----------------------
 if has_key(plugs, 'undotree')
-    nnoremap <leader>u :UndotreeShow<CR>
+    nnoremap <leader>u :UndotreeToggle<CR>
 endif
 
 "----------------------
@@ -139,6 +142,13 @@ if has_key(plugs, 'nerdtree')
     "when vim openning with no file, open NERDTree
     autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
     nnoremap <leader>n :NERDTreeToggle<CR>
+endif
+
+"----------------------
+" tagbar setting
+"----------------------
+if has_key(plugs, 'tagbar')
+    nnoremap <leader>t :TagbarToggle<CR>
 endif
 
 "----------------------
