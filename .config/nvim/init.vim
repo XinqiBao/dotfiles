@@ -250,6 +250,9 @@ nnoremap <silent> <Leader>- :resize -5<CR>
 nnoremap <silent> <Leader>v+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>v- :vertical resize -5<CR>
 
+" shortcut for folding
+nnoremap <silent> <Leader>fi :set foldmethod=indent<CR>
+nnoremap <silent> <Leader>fd :set foldmethod=manual<CR>ggVGzD
 
 "HighLight trailing whitespace"
 highlight ExtraWhitespace ctermbg=red guibg=red
