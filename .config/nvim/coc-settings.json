@@ -1,3 +1,4 @@
 {
-    "coc.preferences.colorSupport": true
+    "coc.preferences.colorSupport": true,
+    "suggest.noselect": true
 }
