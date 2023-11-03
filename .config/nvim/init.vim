@@ -90,7 +90,7 @@ call plug#begin()
     "Plug 'ycm-core/YouCompleteMe'
     "Plug 'rhysd/vim-clang-format'
 
-    Plug 'neoclide/coc.nvim'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
     Plug 'nvim-treesitter/nvim-treesitter'
     "Plug 'mfussenegger/nvim-dap'
@@ -219,7 +219,8 @@ if has_key(plugs, "coc.nvim")
                 \'coc-vimlsp',
                 \'coc-sh',
                 \'coc-json',
-                \'coc-yaml'
+                \'coc-yaml',
+                \'coc-r-lsp',
                 \]
 endif
 

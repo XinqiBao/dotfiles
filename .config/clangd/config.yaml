@@ -1,30 +1,34 @@
 CompileFlags:
-  Add: [
-    -Wall,
-    #-Wextra -Werror,
-    -xc++,
-    -std=c++11,
-    -DCLANGD=1,
+  Add:
+    - -Wall
+    - -Wextra -Werror
+    - -xc++
+    - -std=c++20
+    - -DCLANGD=1
 
-    -I.,
-    -Ilib,
-    -Iinclude,
+    - -I.
+    - -Ilib
+    - -Iinclude
 
-    -I/home/xbao/lib,
+    - -I/home/xbao/lib
 
-    -DVERBOSE=1,
-  ]
+    - -DVERBOSE=1
   Remove: []
 
 Diagnostics:
   ClangTidy:
-    Add: [
-      #performance-*,
-      #bugprone-*,
-      #portability-*,
-      #modernize-*,
-    ]
-    Remove: [
-      #misc-definitions-in-headers,
-      #modernize-use-trailing-return-type,
-    ]
+    Add:
+      - performance-*
+      - bugprone-*
+      - portability-*
+      - modernize-*
+    Remove:
+      - modernize-use-nodiscard
+      - modernize-use-trailing-return-type
+      - bugprone-easily-swappable-parameters
+
+InlayHints:
+  Designators: true
+  Enabled: false
+  ParameterNames: true
+  DeducedTypes: true
