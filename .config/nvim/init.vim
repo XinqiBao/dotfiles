@@ -265,7 +265,7 @@ endif
 " avante.nvim setting
 "----------------------
 if has_key(plugs, 'avante.nvim')
-    lua require('plugin-config/nvim-avante')
+    lua require('plugin-config/avante')
 endif
 
 nnoremap J :tabprevious<CR>
