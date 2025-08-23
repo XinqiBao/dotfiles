@@ -23,6 +23,8 @@ export PS1="[\[\e[36;1m\]\u@\h \[\e[32;1m\]\w\[\e[m\]]\[\e[33m\](\$(git branch 2
 eval "$(fzf --bash)"
 export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"
 
+[ -f ${HOME}/.cargo/env ] && . ${HOME}/.cargo/env
+
 ulimit -c unlimited
 
 <<COMMENT
