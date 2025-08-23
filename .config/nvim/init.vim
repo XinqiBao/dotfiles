@@ -11,7 +11,7 @@ set t_ut=""
 let &termencoding=&encoding
 set fileencodings=utf-8,gbk
 set fileformat=unix
-set foldmethod=manual
+set foldmethod=indent
 set encoding=utf-8 "required for ycm
 
 set tabstop=4
@@ -215,12 +215,14 @@ if has_key(plugs, "coc.nvim")
                 \'coc-marketplace',
                 \'coc-highlight',
                 \'coc-clangd',
-                \'coc-jedi',
-                \'coc-vimlsp',
+                \'coc-pyright',
+                \'coc-lua',
                 \'coc-sh',
+                \'coc-cmake',
+                \'coc-xmake',
                 \'coc-json',
                 \'coc-yaml',
-                \'coc-r-lsp',
+                \'coc-vimlsp',
                 \]
 endif
 
