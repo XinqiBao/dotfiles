@@ -8,7 +8,7 @@ set t_ut=""
 "set term=xterm-256color
 
 "In order to display chinese in GBK
-let &termencoding=&encoding
+"let &termencoding=&encoding
 set fileencodings=utf-8,gbk
 set fileformat=unix
 set foldmethod=indent
