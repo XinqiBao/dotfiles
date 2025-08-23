@@ -47,6 +47,9 @@ set nowritebackup
 set undodir=~/.cache/nvim/undodir
 set undofile
 
+" auto added comment leader, detail for :h formatoptions
+set formatoptions+=/
+
 set tags=tags~;,tags~
 "setting gf (go file) path
 "change kernel version to your version, for kernel development
@@ -95,6 +98,27 @@ call plug#begin()
     Plug 'nvim-treesitter/nvim-treesitter'
     "Plug 'mfussenegger/nvim-dap'
     "Plug 'puremourning/vimspector'
+
+    """
+    "" avante and its dependents
+    " Deps
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'MunifTanjim/nui.nvim'
+    Plug 'MeanderingProgrammer/render-markdown.nvim'
+
+    " Optional deps
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'nvim-tree/nvim-web-devicons' "or Plug 'echasnovski/mini.icons'
+    Plug 'HakonHarnes/img-clip.nvim'
+    Plug 'zbirenbaum/copilot.lua'
+    Plug 'stevearc/dressing.nvim' " for enhanced input UI
+    Plug 'folke/snacks.nvim' " for modern input UI
+
+    " Yay, pass source=true if you want to build from source
+    Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }
+    ""
+    ""
+
 call plug#end()
 
 "----------------------
@@ -237,6 +261,12 @@ if has_key(plugs, 'nvim-treesitter')
     set foldlevel=99
 endif
 
+"----------------------
+" avante.nvim setting
+"----------------------
+if has_key(plugs, 'avante.nvim')
+    lua require('plugin-config/nvim-avante')
+endif
 
 nnoremap J :tabprevious<CR>
 nnoremap K :tabnext<CR>
