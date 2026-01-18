@@ -48,7 +48,7 @@ set undodir=~/.cache/nvim/undodir
 set undofile
 
 " auto added comment leader, detail for :h formatoptions
-set formatoptions+=/
+set formatoptions+=/ro
 
 set tags=tags~;,tags~
 "setting gf (go file) path
@@ -74,7 +74,6 @@ call plug#begin()
     Plug 'Yggdroot/indentLine'
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'vim-airline/vim-airline'
-    "Plug 'vim-airline/vim-airline-themes'
 
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
@@ -90,14 +89,9 @@ call plug#begin()
     Plug 'airblade/vim-gitgutter'
     Plug 'kdheepak/lazygit.nvim'
 
-    "Plug 'ycm-core/YouCompleteMe'
-    "Plug 'rhysd/vim-clang-format'
-
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
     Plug 'nvim-treesitter/nvim-treesitter'
-    "Plug 'mfussenegger/nvim-dap'
-    "Plug 'puremourning/vimspector'
 
     """
     "" avante and its dependents
@@ -176,23 +170,6 @@ if has_key(plugs, 'tagbar')
 endif
 
 "----------------------
-" YouCompleteMe setting
-"----------------------
-if has_key(plugs, 'YouCompleteMe')
-    let g:ycm_global_ycm_extra_conf = '~/.config/nvim/ycm_extra_conf.py'
-    let g:ycm_confirm_extra_conf = 0
-    let g:ycm_enable_diagnostic_signs = 0
-    let g:ycm_always_populate_location_list = 1
-    "let g:ycm_show_diagnostics_ui = 0
-    let g:ycm_add_preview_to_completeopt = 1
-    let g:ycm_autoclose_preview_window_after_completion = 1
-    let g:ycm_auto_hover = 'no'
-
-    nnoremap <silent> <leader>gd :YcmCompleter GoTo<CR>
-    nnoremap <silent> <leader>gr :YcmCompleter GoToReferences<CR>
-endif
-
-"----------------------
 " coc.vim setting
 "----------------------
 if has_key(plugs, "coc.nvim")
@@ -256,7 +233,8 @@ endif
 if has_key(plugs, 'nvim-treesitter')
     lua require('plugin-config/nvim-treesitter')
 
-    set foldmethod=expr
+    "set foldmethod=expr
+    set foldmethod=indent
     set foldexpr=nvim_treesitter#foldexpr()
     set foldlevel=99
 endif
@@ -286,6 +264,10 @@ nnoremap <silent> <Leader>v- :vertical resize -5<CR>
 " shortcut for folding
 nnoremap <silent> <Leader>fi :set foldmethod=indent<CR>
 nnoremap <silent> <Leader>fd :set foldmethod=manual<CR>ggVGzD
+
+" 禁用 <C-a>
+nnoremap <C-a> <Nop>
+xnoremap <C-a> <Nop>
 
 "HighLight trailing whitespace"
 highlight ExtraWhitespace ctermbg=red guibg=red
