@@ -1,4 +1,8 @@
 {
     "coc.preferences.colorSupport": true,
+    "clangd.disableSnippetCompletion": true,
+    "inlayHint.enable": false,
+    "semanticTokens.enable": true,
+    "Lua.diagnostics.enable": false,
     "suggest.noselect": true
 }
