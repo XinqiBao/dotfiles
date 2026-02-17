@@ -84,6 +84,7 @@ call plug#begin()
     Plug 'majutsushi/tagbar'
 
     Plug 'plasticboy/vim-markdown'
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 
     Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
