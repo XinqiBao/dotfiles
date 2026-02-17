@@ -18,8 +18,8 @@ BRANCH=$(git -C "$CWD" --no-optional-locks branch --show-current 2>/dev/null)
 # 颜色定义
 # ============================================================
 R='\033[0m'
-C_MODEL='\033[1;37m'    # 粗体白 - 模型名
-C_CWD='\033[1;34m'      # 粗体蓝 - 工作目录
+C_MODEL='\033[37m'      # 白色   - 模型名
+C_CWD='\033[34m'        # 蓝色   - 工作目录
 C_BRANCH='\033[36m'     # 青色   - git 分支
 C_COST='\033[33m'       # 黄色   - 花费
 C_DUR='\033[35m'        # 紫色   - 时长
@@ -38,17 +38,17 @@ else C_CTX='\033[32m'; fi
 BAR_WIDTH=15
 FILLED=$((PCT * BAR_WIDTH / 100))
 EMPTY=$((BAR_WIDTH - FILLED))
-BAR="${C_CTX}$(printf "%${FILLED}s" | tr ' ' '▓')${C_DIM}$(printf "%${EMPTY}s" | tr ' ' '░')${R}"
+BAR="${C_CTX}$(printf "%${FILLED}s" | tr ' ' '=')${C_DIM}$(printf "%${EMPTY}s" | tr ' ' '-')${R}"
 
 # ============================================================
 # 分段构建 - 注释掉 seg_xxx 行即可关闭对应段
 # ============================================================
-SEP=" │ "
+SEP=" | "
 OUT=""
 add() { [ -n "$OUT" ] && OUT="${OUT}${SEP}"; OUT="${OUT}$1"; }
 
 # [1] 模型 + 版本
-seg_model="${C_MODEL}${MODEL}"
+seg_model="${C_MODEL}${MODEL}${R}"
 add "$seg_model"
 
 # [2] 工作目录 (~ 缩写, 最后两级)
@@ -58,12 +58,12 @@ add "$seg_cwd"
 
 # [3] Git 分支
 if [ -n "$BRANCH" ]; then
-  seg_git="${C_BRANCH}⎇ ${BRANCH}${R}"
+  seg_git="${C_BRANCH}@ ${BRANCH}${R}"
   add "$seg_git"
 fi
 
 # [4] 上下文进度条 + 百分比
-seg_ctx="${BAR} ${C_CTX}${PCT}%%${R}"
+seg_ctx="${BAR} ${C_CTX}${PCT}%${R}"
 add "$seg_ctx"
 
 # [5] 花费
