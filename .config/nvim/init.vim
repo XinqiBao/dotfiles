@@ -241,6 +241,13 @@ if has_key(plugs, 'nvim-treesitter')
 endif
 
 "----------------------
+" copilot.lua setting
+"----------------------
+if has_key(plugs, 'copilot.lua')
+    lua require('plugin-config/copilot')
+endif
+
+"----------------------
 " avante.nvim setting
 "----------------------
 if has_key(plugs, 'avante.nvim')
