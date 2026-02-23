@@ -16,12 +16,18 @@ fi
 ln -sf "$SCRIPT_DIR/claude/CLAUDE.md" "$CLAUDE_DIR/CLAUDE.md"
 echo "  ✓ CLAUDE.md"
 
-# Symlink commands
-mkdir -p "$CLAUDE_DIR/commands"
-for cmd in "$SCRIPT_DIR"/claude/commands/xdev-*.md; do
-    [ -f "$cmd" ] || continue
-    ln -sf "$cmd" "$CLAUDE_DIR/commands/$(basename "$cmd")"
-    echo "  ✓ commands/$(basename "$cmd")"
-done
+# Install xdev plugin from devloop marketplace
+# Plugin includes: skills (xdev-implement, xdev-draft, xdev-setup)
+#                  hooks (commit validation, sensitive file protection)
+echo ""
+echo "Installing xdev plugin..."
+if command -v claude &>/dev/null; then
+    claude plugin marketplace add XinqiBao/devloop 2>/dev/null || true
+    claude plugin install xdev@devloop 2>/dev/null || true
+    echo "  ✓ xdev@devloop plugin (skills + hooks)"
+else
+    echo "  ⚠ claude CLI not found, skipping plugin install"
+fi
 
+echo ""
 echo "Done. Claude Code xdev workflow installed."
