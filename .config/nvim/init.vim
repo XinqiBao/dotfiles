@@ -98,6 +98,7 @@ call plug#begin()
     Plug 'zbirenbaum/copilot.lua'
 
     " execute 'source' fnameescape(expand('<sfile>:p:h') . '/opt/avante.vim')
+    " execute 'source' fnameescape(expand('<sfile>:p:h') . '/opt/leetcode.vim')
 
 call plug#end()
 
@@ -237,6 +238,13 @@ endif
 "----------------------
 if has_key(plugs, 'avante.nvim')
     lua require('plugin-config/avante')
+endif
+
+"----------------------
+" leetcode.nvim setting
+"----------------------
+if has_key(plugs, 'leetcode.nvim')
+    lua require('plugin-config/leetcode')
 endif
 
 nnoremap J :tabprevious<CR>
