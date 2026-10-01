@@ -1,24 +1,23 @@
 syntax enable
 let mapleader=" "
 
-set background=dark
-set termguicolors
-
-"In order to display chinese in GBK
+" Files and indentation
+set encoding=utf-8
+" In order to display Chinese in GBK
 set fileencodings=utf-8,gbk
 set fileformat=unix
-set foldmethod=indent
-set foldlevelstart=99
-set foldlevel=99
-set encoding=utf-8
-
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
 set smartindent
 set backspace=indent,eol,start
+" Auto added comment leader; see :h formatoptions
+set formatoptions+=/ro
 
+" Display and search
+set background=dark
+set termguicolors
 set number
 set nowrap
 set signcolumn=auto
@@ -32,7 +31,14 @@ set showtabline=2
 set laststatus=2 "always show status line
 set noshowmode
 set wildmenu
+set colorcolumn=120
+highlight ColorColumn ctermbg=0 guibg=lightgrey
+" Fallback for filetypes without a Tree-sitter parser.
+set foldmethod=indent
+set foldlevelstart=99
+set foldlevel=99
 
+" Interaction and persistence
 set mouse=a
 set autochdir
 set updatetime=300
@@ -45,20 +51,6 @@ set nowritebackup
 set undodir=~/.cache/nvim/undodir
 set undofile
 
-" auto added comment leader, detail for :h formatoptions
-set formatoptions+=/ro
-
-set tags=tags~;,tags~
-"setting gf (go file) path
-"change kernel version to your version, for kernel development
-set path=.,lib;,include;,includes;
-set path+=/usr/include,/usr/include/c++/*
-set path+=/usr/local/include
-
-"ColumnLimit
-set colorcolumn=120
-highlight ColorColumn ctermbg=0 guibg=lightgrey
-
 " Writes to the unnamed register also writes to the * and + registers. This
 " makes it easy to interact with the system clipboard
 if has ('unnamedplus')
@@ -67,48 +59,54 @@ else
     set clipboard=unnamed
 endif
 
-call plug#begin()
-    Plug 'morhetz/gruvbox'
-    Plug 'lukas-reineke/indent-blankline.nvim'
-    Plug 'christoomey/vim-tmux-navigator'
-    Plug 'vim-airline/vim-airline'
+" File navigation
+set tags=tags~;,tags~
+"setting gf (go file) path
+"change kernel version to your version, for kernel development
+set path=.,lib;,include;,includes;
+set path+=/usr/include,/usr/include/c++/*
+set path+=/usr/local/include
 
+call plug#begin()
+    " Appearance
+    Plug 'morhetz/gruvbox'
+    Plug 'vim-airline/vim-airline'
+    Plug 'lukas-reineke/indent-blankline.nvim'
+
+    " Navigation
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
+    Plug 'preservim/nerdtree'
+    Plug 'christoomey/vim-tmux-navigator'
+    Plug 'mbbill/undotree'
+    Plug 'majutsushi/tagbar'
     Plug 'ludovicchabant/vim-gutentags'
 
-    Plug 'mbbill/undotree'
-    Plug 'preservim/nerdtree'
-    Plug 'majutsushi/tagbar'
+    " Development
+    Plug 'nvim-treesitter/nvim-treesitter'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'zbirenbaum/copilot.lua'
 
-    Plug 'MeanderingProgrammer/render-markdown.nvim'
-    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
-
+    " Git
     Plug 'tpope/vim-fugitive'
     Plug 'lewis6991/gitsigns.nvim'
     Plug 'kdheepak/lazygit.nvim'
 
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    " Markdown
+    Plug 'MeanderingProgrammer/render-markdown.nvim'
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 
-    Plug 'nvim-treesitter/nvim-treesitter'
-
-    Plug 'zbirenbaum/copilot.lua'
-
+    " Optional
     " execute 'source' fnameescape(expand('<sfile>:p:h') . '/opt/avante.vim')
     " execute 'source' fnameescape(expand('<sfile>:p:h') . '/opt/leetcode.vim')
 
 call plug#end()
 
-"----------------------
-" gruvbox setting
-"----------------------
+" Appearance
 if has_key(plugs, 'gruvbox')
     colorscheme gruvbox
 endif
 
-"----------------------
-" vim-airline setting
-"----------------------
 if has_key(plugs, 'vim-airline')
     "tabline with airline
     ":help airline-tabline
@@ -119,38 +117,22 @@ if has_key(plugs, 'vim-airline')
     let g:airline#extensions#tabline#show_close_button = 0
 endif
 
-"----------------------
-" fzf.vim setting
-"----------------------
+if has_key(plugs, 'indent-blankline.nvim')
+    lua require('ibl').setup()
+endif
+
+" Navigation
 if has_key(plugs, 'fzf.vim')
-    function! s:ProjectRg(query) abort
-        let dir = expand('%:p:h')
-        let dir = isdirectory(dir) ? dir : getcwd()
-        let root = systemlist('git -C ' . shellescape(dir) . ' rev-parse --show-toplevel 2>/dev/null')
-        if v:shell_error || empty(root)
-            echoerr 'Not in a Git repository'
-            return
-        endif
-        call fzf#vim#grep2(
-                    \ 'rg --hidden --glob "!.git" --column --line-number --no-heading --color=always --smart-case -- ',
-                    \ a:query, fzf#vim#with_preview({'dir': root[0]}))
-    endfunction
-
-    command! -nargs=* ProjectRg call <SID>ProjectRg(<q-args>)
+    command! -bang -nargs=* GGrep
+                \ call fzf#vim#grep(
+                \   'git grep --line-number -- ' . fzf#shellescape(<q-args>),
+                \   fzf#vim#with_preview({
+                \     'dir': systemlist(['git', '-C', expand('%:p:h'), 'rev-parse', '--show-toplevel'])[0]
+                \   }), <bang>0)
     nnoremap <C-p> :GFiles<CR>
-    nnoremap <C-f> :ProjectRg<CR>
+    nnoremap <C-f> :GGrep<CR>
 endif
 
-"----------------------
-" undotree setting
-"----------------------
-if has_key(plugs, 'undotree')
-    nnoremap <leader>u :UndotreeToggle<CR>
-endif
-
-"----------------------
-" nerdtree setting
-"----------------------
 if has_key(plugs, 'nerdtree')
     autocmd StdinReadPre * let s:std_in=1
     "when vim openning with no file, open NERDTree
@@ -158,16 +140,19 @@ if has_key(plugs, 'nerdtree')
     nnoremap <leader>n :NERDTreeToggle<CR>
 endif
 
-"----------------------
-" tagbar setting
-"----------------------
+if has_key(plugs, 'undotree')
+    nnoremap <leader>u :UndotreeToggle<CR>
+endif
+
 if has_key(plugs, 'tagbar')
     nnoremap <leader>t :TagbarToggle<CR>
 endif
 
-"----------------------
-" coc.vim setting
-"----------------------
+" Development
+if has_key(plugs, 'nvim-treesitter')
+    lua require('plugin-config/nvim-treesitter')
+endif
+
 if has_key(plugs, "coc.nvim")
     " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
     nmap <silent> <leader>g[ <Plug>(coc-diagnostic-prev)
@@ -223,17 +208,11 @@ if has_key(plugs, "coc.nvim")
                 \]
 endif
 
-"----------------------
-" nvim-treesitter setting
-"----------------------
-if has_key(plugs, 'nvim-treesitter')
-    lua require('plugin-config/nvim-treesitter')
+if has_key(plugs, 'copilot.lua')
+    lua require('plugin-config/copilot')
 endif
 
-if has_key(plugs, 'indent-blankline.nvim')
-    lua require('ibl').setup({ scope = { enabled = false } })
-endif
-
+" Git
 if has_key(plugs, 'gitsigns.nvim')
     lua require('plugin-config/gitsigns')
 endif
@@ -242,27 +221,16 @@ if has_key(plugs, 'lazygit.nvim')
     nnoremap <silent> <leader>lg :LazyGit<CR>
 endif
 
-"----------------------
-" copilot.lua setting
-"----------------------
-if has_key(plugs, 'copilot.lua')
-    lua require('plugin-config/copilot')
-endif
-
-"----------------------
-" avante.nvim setting
-"----------------------
+" Optional
 if has_key(plugs, 'avante.nvim')
     lua require('plugin-config/avante')
 endif
 
-"----------------------
-" leetcode.nvim setting
-"----------------------
 if has_key(plugs, 'leetcode.nvim')
     lua require('plugin-config/leetcode')
 endif
 
+" General mappings
 nnoremap J :tabprevious<CR>
 nnoremap K :tabnext<CR>
 nnoremap <leader>J :tabmove -1<CR>
@@ -273,10 +241,6 @@ nnoremap <silent> <Leader>+ :resize +5<CR>
 nnoremap <silent> <Leader>- :resize -5<CR>
 nnoremap <silent> <Leader>v+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>v- :vertical resize -5<CR>
-
-" shortcut for folding
-nnoremap <silent> <Leader>fi :set foldmethod=indent<CR>
-nnoremap <silent> <Leader>fd :set foldmethod=manual<CR>ggVGzD
 
 " 禁用 <C-a>
 nnoremap <C-a> <Nop>
