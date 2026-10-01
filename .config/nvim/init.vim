@@ -87,7 +87,6 @@ call plug#begin()
     Plug 'zbirenbaum/copilot.lua'
 
     " Git
-    Plug 'tpope/vim-fugitive'
     Plug 'lewis6991/gitsigns.nvim'
     Plug 'kdheepak/lazygit.nvim'
 

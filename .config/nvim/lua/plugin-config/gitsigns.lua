@@ -23,7 +23,7 @@ require('gitsigns').setup({
     map('n', '<leader>hp', gs.preview_hunk)
     map('n', '<leader>hs', gs.stage_hunk)
     map('n', '<leader>hr', gs.reset_hunk)
-    map('n', '<leader>hb', function() gs.blame_line({ full = true }) end)
+    map('n', '<leader>hb', gs.blame)
     map('x', '<leader>hs', function()
       gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
     end)
