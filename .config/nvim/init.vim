@@ -3,16 +3,14 @@ let mapleader=" "
 
 set background=dark
 set termguicolors
-set t_Co=256 "terminal color
-set t_ut=""
-"set term=xterm-256color
 
 "In order to display chinese in GBK
-"let &termencoding=&encoding
 set fileencodings=utf-8,gbk
 set fileformat=unix
 set foldmethod=indent
-set encoding=utf-8 "required for ycm
+set foldlevelstart=99
+set foldlevel=99
+set encoding=utf-8
 
 set tabstop=4
 set softtabstop=4
@@ -71,7 +69,7 @@ endif
 
 call plug#begin()
     Plug 'morhetz/gruvbox'
-    Plug 'Yggdroot/indentLine'
+    Plug 'lukas-reineke/indent-blankline.nvim'
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'vim-airline/vim-airline'
 
@@ -84,11 +82,10 @@ call plug#begin()
     Plug 'majutsushi/tagbar'
 
     Plug 'MeanderingProgrammer/render-markdown.nvim'
-    Plug 'plasticboy/vim-markdown'
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 
     Plug 'tpope/vim-fugitive'
-    Plug 'airblade/vim-gitgutter'
+    Plug 'lewis6991/gitsigns.nvim'
     Plug 'kdheepak/lazygit.nvim'
 
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -126,10 +123,22 @@ endif
 " fzf.vim setting
 "----------------------
 if has_key(plugs, 'fzf.vim')
-    "mapping for fzf.vim
+    function! s:ProjectRg(query) abort
+        let dir = expand('%:p:h')
+        let dir = isdirectory(dir) ? dir : getcwd()
+        let root = systemlist('git -C ' . shellescape(dir) . ' rev-parse --show-toplevel 2>/dev/null')
+        if v:shell_error || empty(root)
+            echoerr 'Not in a Git repository'
+            return
+        endif
+        call fzf#vim#grep2(
+                    \ 'rg --hidden --glob "!.git" --column --line-number --no-heading --color=always --smart-case -- ',
+                    \ a:query, fzf#vim#with_preview({'dir': root[0]}))
+    endfunction
+
+    command! -nargs=* ProjectRg call <SID>ProjectRg(<q-args>)
     nnoremap <C-p> :GFiles<CR>
-    "as default <C-f>/<C-b> pair used to page down/up entire page
-    nnoremap <C-f> :Tags<CR>
+    nnoremap <C-f> :ProjectRg<CR>
 endif
 
 "----------------------
@@ -219,11 +228,18 @@ endif
 "----------------------
 if has_key(plugs, 'nvim-treesitter')
     lua require('plugin-config/nvim-treesitter')
+endif
 
-    "set foldmethod=expr
-    set foldmethod=indent
-    set foldexpr=nvim_treesitter#foldexpr()
-    set foldlevel=99
+if has_key(plugs, 'indent-blankline.nvim')
+    lua require('ibl').setup({ scope = { enabled = false } })
+endif
+
+if has_key(plugs, 'gitsigns.nvim')
+    lua require('plugin-config/gitsigns')
+endif
+
+if has_key(plugs, 'lazygit.nvim')
+    nnoremap <silent> <leader>lg :LazyGit<CR>
 endif
 
 "----------------------
@@ -251,10 +267,6 @@ nnoremap J :tabprevious<CR>
 nnoremap K :tabnext<CR>
 nnoremap <leader>J :tabmove -1<CR>
 nnoremap <leader>K :tabmove +1<CR>
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
 nnoremap <silent> <Leader>+ :resize +5<CR>
@@ -273,10 +285,3 @@ xnoremap <C-a> <Nop>
 "HighLight trailing whitespace"
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
-
-"use powerline-vim for normal use
-"instead of installing for both user and root
-"run to install lib: pip3 install --user powerline-status
-"python3 from powerline.vim import setup as powerline_setup
-"python3 powerline_setup()
-"python3 del powerline_setup
