@@ -79,8 +79,7 @@ call plug#begin()
     Plug 'preservim/nerdtree'
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'mbbill/undotree'
-    Plug 'majutsushi/tagbar'
-    Plug 'ludovicchabant/vim-gutentags'
+    Plug 'stevearc/aerial.nvim'
 
     " Development
     Plug 'nvim-treesitter/nvim-treesitter'
@@ -144,8 +143,9 @@ if has_key(plugs, 'undotree')
     nnoremap <leader>u :UndotreeToggle<CR>
 endif
 
-if has_key(plugs, 'tagbar')
-    nnoremap <leader>t :TagbarToggle<CR>
+if has_key(plugs, 'aerial.nvim')
+    lua require('aerial').setup()
+    nnoremap <leader>a <cmd>AerialToggle!<CR>
 endif
 
 " Development
