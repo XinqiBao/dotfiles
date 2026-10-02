@@ -28,6 +28,10 @@ ulimit -c unlimited
 #export HTTP_PROXY=$proxy_url
 #export HTTPS_PROXY=$proxy_url
 
+if command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate bash)"
+fi
+
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --bash)"
 export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"

@@ -5,6 +5,7 @@ Personal configuration for Bash, tmux, Vim, Neovim, C/C++ tooling, and X11. Conf
 ## Contents
 
 - `.bashrc`, `.tmux.conf`: shell and terminal multiplexer settings.
+- `.config/mise/config.toml`: optional versions for selected interactive tools.
 - `.vimrc`, `.config/nvim/`: separate Vim and Neovim configurations.
 - `.clang-format`, `.config/clangd/`, `.ycm_extra_conf.py`: C/C++ tooling.
 - `.xinitrc`, `.config/x11/`: X11 startup, resources, and key bindings.
@@ -12,6 +13,8 @@ Personal configuration for Bash, tmux, Vim, Neovim, C/C++ tooling, and X11. Conf
 ## Use
 
 Link or copy the relevant files into place, or merge them with existing settings. Editor plugins and external commands generally require separate installation. Review hard-coded paths, display settings, and other machine-specific assumptions before use, then test the affected tools.
+
+Optional: [install mise](https://mise.jdx.dev/getting-started.html), link or copy its configuration to `$HOME/.config/mise/config.toml`, then run `mise install` from `$HOME`. Bash activates mise when available; installed tools take precedence on `PATH`. Use `mise upgrade` to update them. mise manages selected interactive tools; system packages and project toolchains remain separate.
 
 ## Maintenance
 

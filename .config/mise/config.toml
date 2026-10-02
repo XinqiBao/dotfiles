@@ -1,0 +1,7 @@
+[tools]
+neovim = "0.12"
+tree-sitter = "0.26"
+tmux = "latest"
+fzf = "latest"
+bat = "latest"
+lazygit = "latest"
