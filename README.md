@@ -16,6 +16,8 @@ Link or copy the relevant files into place, or merge them with existing settings
 
 Optional: [install mise](https://mise.jdx.dev/getting-started.html), link or copy its configuration to `$HOME/.config/mise/config.toml`, then run `mise install` from `$HOME`. Bash activates mise when available; installed tools take precedence on `PATH`. Use `mise upgrade` to update them. mise manages selected interactive tools; system packages and project toolchains remain separate.
 
+Neovim installs its parser baseline asynchronously; reopen the buffer after installation. Use `:TSInstall <language>` for additional parsers and `:TSUpdate` after plugin updates. Installation requires tree-sitter CLI, a C compiler, curl, and tar.
+
 ## Maintenance
 
 Prefer each tool's supported commands, APIs, and defaults where they fit the intended workflow. Treat upstream examples as patterns to evaluate against this configuration and environment, not recipes to copy unchanged. Add small local code only for a concrete need.

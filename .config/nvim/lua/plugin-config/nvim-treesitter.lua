@@ -1,5 +1,24 @@
-require('nvim-treesitter').setup {
+local treesitter = require('nvim-treesitter')
+
+treesitter.setup {
   install_dir = vim.fn.stdpath('data') .. '/site',
+}
+
+treesitter.install {
+  'bash',
+  'c',
+  'cmake',
+  'cpp',
+  'json',
+  'lua',
+  'markdown',
+  'markdown_inline',
+  'python',
+  'query',
+  'toml',
+  'vim',
+  'vimdoc',
+  'yaml',
 }
 
 local function enable(buf)
