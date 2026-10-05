@@ -33,8 +33,9 @@ set noshowmode
 set wildmenu
 set colorcolumn=120
 highlight ColorColumn ctermbg=0 guibg=lightgrey
-" Fallback for filetypes without a Tree-sitter parser.
-set foldmethod=indent
+" Create folds only after a Tree-sitter parser is started.
+set foldmethod=expr
+set foldexpr=0
 set foldlevelstart=99
 set foldlevel=99
 
