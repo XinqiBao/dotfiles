@@ -38,6 +38,9 @@ set foldmethod=expr
 set foldexpr=0
 set foldlevelstart=99
 set foldlevel=99
+" Indent summaries one level past the retained first line, not a continuation.
+let &foldtext = 'repeat(" ", indent(v:foldstart - 1) + shiftwidth()) . printf("… %d lines …", v:foldend - v:foldstart + 1)'
+set fillchars+=fold:\  " Leave the rest of the summary line blank.
 
 " Interaction and persistence
 set mouse=a
