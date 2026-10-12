@@ -224,6 +224,12 @@ if has_key(plugs, 'lazygit.nvim')
     nnoremap <silent> <leader>lg :LazyGit<CR>
 endif
 
+" Markdown
+if has_key(plugs, 'markdown-preview.nvim')
+    let g:mkdp_echo_preview_url = 1
+    let g:mkdp_open_to_the_world = 1
+endif
+
 " Optional
 if has_key(plugs, 'avante.nvim')
     lua require('plugin-config/avante')
