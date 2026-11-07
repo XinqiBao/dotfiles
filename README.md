@@ -1,10 +1,11 @@
 # dotfiles
 
-Personal configuration for Bash, tmux, Vim, Neovim, C/C++ tooling, and X11. Configuration paths mirror their intended locations relative to `$HOME`. This repository has no installer.
+Personal configuration for shells, terminals, editors, C/C++ tooling, and X11. Configuration paths mirror their intended locations relative to `$HOME`. This repository has no installer.
 
 ## Contents
 
 - `.bashrc`, `.tmux.conf`: shell and terminal multiplexer settings.
+- `.config/herdr/config.toml`: Herdr settings.
 - `.config/mise/config.toml`: optional versions for selected interactive tools.
 - `.vimrc`, `.config/nvim/`: separate Vim and Neovim configurations.
 - `.clang-format`, `.config/clangd/`, `.ycm_extra_conf.py`: C/C++ tooling.
