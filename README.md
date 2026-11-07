@@ -5,6 +5,7 @@ Personal configuration for shells, terminals, editors, C/C++ tooling, and X11. C
 ## Contents
 
 - `.bashrc`, `.tmux.conf`: shell and terminal multiplexer settings.
+- `.config/ghostty/config.ghostty`: Ghostty theme and macOS Option key settings.
 - `.config/herdr/config.toml`: Herdr settings.
 - `.config/mise/config.toml`: optional versions for selected interactive tools.
 - `.vimrc`, `.config/nvim/`: separate Vim and Neovim configurations.
