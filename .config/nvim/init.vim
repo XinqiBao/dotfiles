@@ -240,8 +240,8 @@ if has_key(plugs, 'leetcode.nvim')
 endif
 
 " General mappings
-nnoremap J :tabprevious<CR>
-nnoremap K :tabnext<CR>
+nnoremap H :tabprevious<CR>
+nnoremap L :tabnext<CR>
 nnoremap <leader>J :tabmove -1<CR>
 nnoremap <leader>K :tabmove +1<CR>
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
