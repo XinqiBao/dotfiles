@@ -190,7 +190,7 @@ if has_key(plugs, "coc.nvim")
     " clangd
     nmap <leader>gh :CocCommand clangd.switchSourceHeader<CR>
 
-    " Use K to show documentation in preview window.
+    " Use <leader>h to show documentation.
     nnoremap <silent> <leader>h :call <SID>show_documentation()<CR>
     function! s:show_documentation()
       if (index(['vim','help'], &filetype) >= 0)
@@ -246,19 +246,21 @@ if has_key(plugs, 'leetcode.nvim')
     lua require('plugin-config/leetcode')
 endif
 
+" Tab navigation
+nnoremap <S-j> :tabprevious<CR>
+nnoremap <S-k> :tabnext<CR>
+nnoremap <leader><S-j> :tabmove -1<CR>
+nnoremap <leader><S-k> :tabmove +1<CR>
+
 " General mappings
-nnoremap H :tabprevious<CR>
-nnoremap L :tabnext<CR>
-nnoremap <leader>J :tabmove -1<CR>
-nnoremap <leader>K :tabmove +1<CR>
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
-nnoremap <silent> <Leader>+ :resize +5<CR>
-nnoremap <silent> <Leader>- :resize -5<CR>
-nnoremap <silent> <Leader>v+ :vertical resize +5<CR>
-nnoremap <silent> <Leader>v- :vertical resize -5<CR>
+nnoremap <silent> <leader>+ :resize +5<CR>
+nnoremap <silent> <leader>- :resize -5<CR>
+nnoremap <silent> <leader>v+ :vertical resize +5<CR>
+nnoremap <silent> <leader>v- :vertical resize -5<CR>
 
-" 禁用 <C-a>
+" Reserve Ctrl+A for the multiplexer prefix.
 nnoremap <C-a> <Nop>
 xnoremap <C-a> <Nop>
 

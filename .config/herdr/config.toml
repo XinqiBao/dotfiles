@@ -21,8 +21,8 @@ toggle_sidebar = "prefix+b"
 open_notification_target = ""
 
 # Workspaces
-previous_workspace = "alt+shift+k"
-next_workspace = "alt+shift+j"
+previous_workspace = "alt+k"
+next_workspace = "alt+j"
 workspace_picker = ""
 new_workspace = ""
 new_worktree = ""
@@ -30,8 +30,8 @@ rename_workspace = ""
 close_workspace = ""
 
 # Tabs
-previous_tab = "alt+shift+h"
-next_tab = "alt+shift+l"
+previous_tab = "alt+shift+j"
+next_tab = "alt+shift+k"
 switch_tab = ["alt+1..9", "prefix+1..9"]
 new_tab = ""
 rename_tab = ""
