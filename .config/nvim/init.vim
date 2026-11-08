@@ -81,9 +81,12 @@ call plug#begin()
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'preservim/nerdtree'
-    Plug 'christoomey/vim-tmux-navigator'
     Plug 'mbbill/undotree'
     Plug 'stevearc/aerial.nvim'
+
+    " Pane navigation
+    Plug 'paulbkim-dev/vim-herdr-navigation'
+    " Plug 'christoomey/vim-tmux-navigator'
 
     " Development
     Plug 'nvim-treesitter/nvim-treesitter'
@@ -149,6 +152,10 @@ endif
 if has_key(plugs, 'aerial.nvim')
     lua require('aerial').setup()
     nnoremap <leader>a <cmd>AerialToggle!<CR>
+endif
+
+if has_key(plugs, 'vim-herdr-navigation')
+    runtime editor/vim.vim
 endif
 
 " Development

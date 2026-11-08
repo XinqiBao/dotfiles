@@ -19,3 +19,7 @@ Link or copy the relevant files into place, or merge them with existing settings
 To install the tools listed in `.config/mise/config.toml`, [install mise](https://mise.jdx.dev/getting-started.html), link or copy the file to `$HOME/.config/mise/config.toml`, then run `mise install` from `$HOME`. Use `mise upgrade` to update them.
 
 Neovim installs its parser baseline asynchronously; reopen the buffer after installation. Use `:TSInstall <language>` for additional parsers and `:TSUpdate` after plugin updates. Installation requires tree-sitter CLI, a C compiler, curl, and tar.
+
+## Herdr plugins
+
+- [vim-herdr-navigation](https://github.com/paulbkim-dev/vim-herdr-navigation)
