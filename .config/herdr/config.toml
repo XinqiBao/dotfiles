@@ -16,7 +16,7 @@ help = "prefix+?"
 settings = "prefix+s"
 reload_config = "prefix+r"
 detach = "prefix+q"
-goto = "prefix+p"
+goto = "prefix+w"
 toggle_sidebar = "prefix+b"
 open_notification_target = ""
 
@@ -30,8 +30,8 @@ rename_workspace = ""
 close_workspace = ""
 
 # Tabs
-previous_tab = "alt+shift+j"
-next_tab = "alt+shift+k"
+previous_tab = ["alt+shift+j", "prefix+p"]
+next_tab = ["alt+shift+k", "prefix+n"]
 switch_tab = ["alt+1..9", "prefix+1..9"]
 new_tab = ""
 rename_tab = ""
