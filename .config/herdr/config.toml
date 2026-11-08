@@ -92,7 +92,6 @@ description = "Navigate right (Vim/Herdr)"
 
 [ui]
 prompt_new_tab_name = false
-tab_bar_right = [{ type = "datetime", format = "%H:%M" }]
 
 [ui.toast]
 delivery = "herdr"
