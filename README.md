@@ -5,6 +5,7 @@ Personal configuration for shells, terminals, editors, C/C++ tooling, and X11. C
 ## Contents
 
 - `.bashrc`, `.tmux.conf`: shell and terminal multiplexer settings.
+- `.ssh/config`: SSH keepalive defaults.
 - `.config/ghostty/config.ghostty`: Ghostty theme, macOS Option key settings, and icon font mappings.
 - `.config/herdr/config.toml`: Herdr settings.
 - `.config/mise/config.toml`: optional versions for selected interactive tools.
