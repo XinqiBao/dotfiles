@@ -5,6 +5,7 @@ name = "gruvbox"
 auto_switch = false
 
 [terminal]
+shell_mode = "login"
 new_cwd = "follow"
 
 [keys]
